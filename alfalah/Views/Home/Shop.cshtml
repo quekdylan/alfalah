@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Shop";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @@media (max-width: 880px) {
+
+    }
+</style>
+
+<main>
+    <section style="background-color: black;">
+
+        <button class="snipcart-add-item"
+                data-item-id="starry-night"
+                data-item-price="79.99"
+                data-item-url="/shop"
+                data-item-description="High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh."
+                data-item-image="/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png"
+                data-item-name="The Starry Night">
+            Add to cart
+        </button>
+        <p> test </p>
+    </section>
+
+</main>
+<script src="http://d3js.org/d3.v3.js"></script>
+
+<script>
+    var data = $.csv.toObjects(items.csv);
+    console.log(data)
+</script>
+
+<script async src="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.js"></script>
+<div hidden id="snipcart" data-api-key="YTljNDVlN2MtYjA4MC00YzYwLTlmYjYtY2I3MzhhMTg1MWM2NjM3MzY5NzExMTY1NzExOTg1"></div>

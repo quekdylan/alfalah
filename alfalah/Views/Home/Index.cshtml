@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    main {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 150px 20%;
+    }
+
+    section>div {
+        display: flex;
+        flex-flow: column nowrap;
+    }   
+
+    .font_h {
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 2.5em;
+    }
+
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.5em;
+        font-weight: 200;
+        color: #190f00;
+    }
+
+    .button1 {
+        padding: 10px 20px;
+        background-color: #F0B800;
+        color: black;
+        transition: background-color ease-out 0.2s;
+        cursor: pointer;
+    }
+
+    .button1:hover {
+        box-shadow: inset 0px 0px 0px 2px white;
+        background-color: black;
+        color: #F0B800;
+    }
+
+
+    #flexctr1 {
+        display: flex;
+        width: 100%;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding-top: 100px;
+    }
+
+    #flexctr1>div {
+        width: 30%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .imgContainer {
+        display: flex;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .imgContainer>* {
+        transition: all 0.3s ease-out;
+    }
+
+    .imgContainer:hover > img {
+        filter: brightness(20%);
+    }
+
+    .imgContainer>p {
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        top: 160px;
+        left: 110px;
+        justify-self: center;
+        color: white;
+    }
+
+    .imgContainer:hover > p {
+        opacity: 1;
+        top: 150px;
+    }
+
+    #div1pad {
+        padding-right: 100px;
+    }
+
+    @@media (max-width: 880px) {
+        section {
+            flex-flow: column;
+            justify-content: center;
+            text-align: center;
+            padding: 150px 5%;
+        }
+
+        #div1pad {
+            padding: 0 0 50px 0;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+    }
+
+</style>
+
+<main>
+    <section style="background-color: black; flex-flow: column;">
+        <h1 class="font_h" style="font-size: 4em; color: #F0B800;">AL FALAH</h1>
+        <br />
+        <p style="color: #F0B800;">Punde Limited</p>
+        <img src="~/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png" alt="Logo" style="width: 40%; min-width: 360px;">
+        <br />
+        <div class="button1">
+            Find Out More
+        </div>
+    </section>
+
+    <section style="background-color: #F0B800;">
+        <div id="div1pad">
+            <h1 class="font_h" style="font-size: 3em; color: #3d2500;">Our Vision</h1>
+            <img src="~/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png" alt="Logo" style="width: 100%; min-width: 360px;">
+        </div>
+        <div>
+            <p style="color: #3d2500;">
+                I'm a paragraph. Click here to add your own text and edit me. I’m a great place for you to
+                tell a story and let your users know a little more about you.
+            </p>
+            <div class="button2">
+                <span style="font-size: 1.5em; font-weight: bold;">Our Story</span>
+            </div>
+        </div>
+    </section>
+
+    <section style="flex-flow: column nowrap;">
+        <center>
+            <h1 class="font_h" style="font-size: 3em; color: #3d2500;">Everything we offer</h1>
+        </center>
+
+        <div id="flexctr1">
+            <div>
+                <div style="width: 30px;">
+                    <svg preserveAspectRatio="xMidYMid meet" id="comp-keo7tgej3svgcontent" data-bbox="0 0 35 52.22" viewBox="0 0 35 52.22" xmlns="http://www.w3.org/2000/svg" data-type="color" role="img" aria-labelledby="comp-keo7tgej3-svgtitle">
+                        <title id="comp-keo7tgej3-svgtitle"></title>
+                        <g>
+                            <path fill="#ca4249" d="M35 52.22l-18.17-7.81L0 52.22v-42h35v42z" data-color="1"></path>
+                            <path fill="#ffffff" d="M17.5 18.33l2.54 5.13 5.66.83-4.1 4 .97 5.64-5.07-2.66-5.07 2.66.97-5.64-4.1-4 5.66-.83 2.54-5.13z" data-color="2"></path>
+                            <path fill="#ca4249" d="M35 0v5H0V0h35z" data-color="1"></path>
+                        </g>
+                    </svg>
+                </div>
+                <br />
+                <h2 class="font_h" style="color: #3d2500; text-align: center;">Halal</h2>
+            </div>
+            <div>
+                <div style="width: 30px;">
+                    <svg preserveAspectRatio="xMidYMid meet" id="comp-keo7tgej3svgcontent" data-bbox="0 0 35 52.22" viewBox="0 0 35 52.22" xmlns="http://www.w3.org/2000/svg" data-type="color" role="img" aria-labelledby="comp-keo7tgej3-svgtitle">
+                        <title id="comp-keo7tgej3-svgtitle"></title>
+                        <g>
+                            <path fill="#ca4249" d="M35 52.22l-18.17-7.81L0 52.22v-42h35v42z" data-color="1"></path>
+                            <path fill="#ffffff" d="M17.5 18.33l2.54 5.13 5.66.83-4.1 4 .97 5.64-5.07-2.66-5.07 2.66.97-5.64-4.1-4 5.66-.83 2.54-5.13z" data-color="2"></path>
+                            <path fill="#ca4249" d="M35 0v5H0V0h35z" data-color="1"></path>
+                        </g>
+                    </svg>
+                </div>
+                <br />
+                <h2 class="font_h" style="color: #3d2500; text-align: center;">Hormone Free</h2>
+            </div>
+            <div>
+                <div style="width: 30px;">
+                    <svg preserveAspectRatio="xMidYMid meet" id="comp-keo7tgej3svgcontent" data-bbox="0 0 35 52.22" viewBox="0 0 35 52.22" xmlns="http://www.w3.org/2000/svg" data-type="color" role="img" aria-labelledby="comp-keo7tgej3-svgtitle">
+                        <title id="comp-keo7tgej3-svgtitle"></title>
+                        <g>
+                            <path fill="#ca4249" d="M35 52.22l-18.17-7.81L0 52.22v-42h35v42z" data-color="1"></path>
+                            <path fill="#ffffff" d="M17.5 18.33l2.54 5.13 5.66.83-4.1 4 .97 5.64-5.07-2.66-5.07 2.66.97-5.64-4.1-4 5.66-.83 2.54-5.13z" data-color="2"></path>
+                            <path fill="#ca4249" d="M35 0v5H0V0h35z" data-color="1"></path>
+                        </g>
+                    </svg>
+                </div>
+                <br />
+                <h2 class="font_h" style="color: #3d2500; text-align: center;">Grass Fed</h2>
+            </div>
+        </div>
+        <br />
+        <p style="text-align: center;">
+            I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me to add your own content and make changes to the font. I’m a great place for you to tell a story
+            and let your users know a little more about you.
+        </p>
+        <br />
+        <div class="button1">Need Supplies?</div>
+    </section>
+
+    <section style="background-color: black; flex-flow: column;">
+        <div style="display: flex; flex-flow: row wrap; width: 100%; justify-content: space-around;">
+            <div class="imgContainer">
+                <img src="~/media/800ae9_3e2a96d8e6b94476a8ff478d58b2ca7f_mv2.png" alt="Chicken" />
+                <p>CHICKEN</p>
+            </div>
+            <div class="imgContainer">
+                <img src="~/media/800ae9_ff3d7321a54c45e8ab08566436063c1f_mv2.png" alt="Chicken" />
+                <p>MUTTON</p>
+            </div>
+        </div>
+        <div class="button1" style="margin-top: 120px;">ORDER NOW</div>
+    </section>
+
+</main>

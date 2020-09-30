@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #imgDiv1 {
+        width: 25%;
+        height: 750px;
+        background: url(media/885f815586f74d2493ca39e56aa770dd.png) no-repeat;
+        background-size: cover;
+    }
+
+    #imgDiv2 {
+        width: 25%;
+        height: 750px;
+        background: url(media/f1dcd76240564bdfbafb7c03457c3dc3.png) center no-repeat;
+        background-size: cover;
+    }
+
+    #centerDiv {
+        width: 50%;
+        height: 750px;
+        background-color: #fcf8ed;
+        text-align: center;
+        padding: 10%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-content: center;
+    }
+
+    @@media (max-width: 880px) {
+        section {
+            flex-flow: column;
+        }
+
+        #imgDiv1 {
+            height: 300px;
+            width: 100%;
+        }
+
+        #imgDiv2 {
+            height: 300px;
+            width: 100%;
+        }
+
+        #centerDiv {
+            height: 600px;
+            width: 100%;
+        }
+    }
+</style>
+
+<main>
+    <section>
+        <div id="imgDiv1">        </div>
+
+        <div id="centerDiv">
+            <div>
+                <h1 style="font-family: 'Dancing Script', cursive; font-size: 4em; color: #bc9b5d">About Us</h1>
+                <h2 style="font-family: Lato; font-weight: 100; font-size: 1.5em; color: darkgrey">THIS IS A GREAT PLACE FOR YOUR TAGLINE.</h2>
+                <br />
+                <p style="font-family: 'Segoe UI'; font-weight: 200; font-size: 1.2em; color: darkgrey">
+                    Tell your visitors your story. Add catchy text to describe what you do,
+                    and what you have to offer. The right words can inspire and intrigue your audience,
+                    so they’re ready to take action on your site. To start telling your story, double
+                    click or click Edit Text.
+                </p>
+                <br />
+                <a style="font-family: 'Dancing Script', cursive; font-size: 1.5em; color: #bc9b5d">Book a place ></a>
+            </div>
+        </div>
+
+        <div id="imgDiv2"></div>
+    </section>
+
+</main>

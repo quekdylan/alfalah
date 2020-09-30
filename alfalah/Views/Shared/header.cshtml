@@ -1,0 +1,263 @@
+﻿
+<style>
+    @@keyframes slideRight {
+        0% {
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @@keyframes slideLeft {
+        0% {
+            transform: translateX(+30%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .navbar-brand {
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        font-size: 2em;
+    }
+
+    .nav-link {
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+    }
+
+    .current {
+        color: #ffd800 !important;
+        pointer-events: none;
+    }
+
+    .noborder {
+        border: none !important;
+    }
+
+    .nav-link:active {
+        color: #ffd800 !important;
+    }
+
+    .button_container {
+        position: fixed;
+        top: 3%;
+        right: 4%;
+        height: 20px;
+        width: 25px;
+        cursor: pointer;
+        z-index: 100;
+        -webkit-transition: opacity 0.25s ease;
+        transition: opacity 0.25s ease;
+        display: none;
+    }
+
+        .button_container:hover {
+            opacity: 0.7;
+        }
+
+        .button_container.active .top {
+            -webkit-transform: translateY(8px) translateX(0) rotate(45deg);
+            transform: translateY(8px) translateX(0) rotate(45deg);
+            background: #fff;
+        }
+
+        .button_container.active .middle {
+            opacity: 0;
+            background: #fff;
+        }
+
+        .button_container.active .bottom {
+            -webkit-transform: translateY(-8px) translateX(0) rotate(-45deg);
+            transform: translateY(-8px) translateX(0) rotate(-45deg);
+            background: #fff;
+        }
+
+        .button_container span {
+            background: white;
+            border: none;
+            height: 3px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-transition: all 0.35s ease;
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+            .button_container span:nth-of-type(2) {
+                top: 8px;
+            }
+
+            .button_container span:nth-of-type(3) {
+                top: 16px;
+            }
+
+    .overlay {
+        position: fixed;
+        background: black;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity 0.35s, visibility 0.35s, height 0.35s;
+        transition: opacity 0.35s, visibility 0.35s, height 0.35s;
+        overflow: hidden;
+        z-index: 99;
+    }
+
+        .overlay.open {
+            opacity: 0.9;
+            visibility: visible;
+            height: 100%;
+        }
+
+            .overlay.open li {
+                -webkit-animation: fadeInRight 0.5s ease forwards;
+                animation: fadeInRight 0.5s ease forwards;
+                -webkit-animation-delay: 0.3s;
+                animation-delay: 0.3s;
+            }
+
+                .overlay.open li:nth-of-type(2) {
+                    -webkit-animation-delay: 0.4s;
+                    animation-delay: 0.4s;
+                }
+
+                .overlay.open li:nth-of-type(3) {
+                    -webkit-animation-delay: 0.5s;
+                    animation-delay: 0.5s;
+                }
+
+        .overlay nav {
+            position: relative;
+            height: 70%;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            font-size: 50px;
+            font-family: "Vollkorn", serif;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .overlay ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: inline-block;
+            position: relative;
+            height: 100%;
+        }
+
+            .overlay ul li {
+                display: block;
+                height: 100px;
+                position: relative;
+                opacity: 0;
+            }
+
+                .overlay ul li a {
+                    display: block;
+                    font-size: 0.7em;
+                    position: relative;
+                    color: #fff;
+                    text-decoration: none;
+                    overflow: hidden;
+                    font-family: 'Oswald' sans-serif;
+                }
+
+    @@-webkit-keyframes fadeInRight {
+        0% {
+            opacity: 0;
+            left: 20%;
+        }
+
+        100% {
+            opacity: 1;
+            left: 0;
+        }
+    }
+
+    @@keyframes fadeInRight {
+        0% {
+            opacity: 0;
+            left: 20%;
+        }
+
+        100% {
+            opacity: 1;
+            left: 0;
+        }
+    }
+
+    @@media (max-width: 880px) {
+        .navbar-brand > img {
+            height: 60px;
+        }
+
+        .button_container {
+            display: initial;
+        }
+    }
+</style>
+
+<nav class="navbar navbar-dark fixed-top navbar-expand-sm" style="padding: 10px 10%;  background-color: #25190E;">
+    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+        <span style="color: #ffd800">AL FALAH</span>
+    </a>
+
+    <div class="button_container" id="toggle">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item ml-5">
+                <a class="@("nav-link " + (ViewData["Title"] == "Home" ? "current" : ""))" href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="nav-item ml-5">
+                <a class="@("nav-link " + (ViewData["Title"] == "About Us" ? "current" : ""))" href="~/about-us">About Us</a>
+            </li>
+            <li class="nav-item ml-5">
+                <a class="@("nav-link " + (ViewData["Title"] == "Shop" ? "current" : ""))" href="~/shop">Shop</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="overlay" id="overlay">
+    <nav class="overlay-menu">
+        <ul>
+            <li class="nav-item ml-5">
+                <a class="noborder @((ViewData["Title"] == "Home" ? "current" : ""))" href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="nav-item ml-5">
+                <a class="noborder @((ViewData["Title"] == "About Us" ? "current" : ""))" href="~/about-us">About Us</a>
+            </li>
+            <li class="nav-item ml-5">
+                <a class="noborder @((ViewData["Title"] == "Shop" ? "current" : ""))" href="~/shop">Shop</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script>
+    $('#toggle').click(function () {
+        $(this).toggleClass('active');
+        $('#overlay').toggleClass('open');
+    });
+</script>

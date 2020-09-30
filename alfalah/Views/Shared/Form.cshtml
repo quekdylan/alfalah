@@ -1,0 +1,123 @@
+﻿
+<style>
+    #formSection {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding: 150px 20%;
+    }
+
+    #formSection>div {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 40%;
+    }
+
+    #form1>div {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: stretch;
+    }
+
+    #form1 > div > div {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: stretch;
+    }
+
+    .textbox {
+        border: 4px black solid;
+        height: 50px;
+        width: 95%;
+    }
+
+    .textbox:focus, .textbox:hover {
+        border: 4px #850029 solid;
+    }
+
+    .button2 {
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.00);
+        color: darkred;
+        transition: background-color ease-out 0.2s;
+        cursor: pointer;
+        box-shadow: inset 0px 0px 0px 4px darkred;
+        width: fit-content;
+        align-self: flex-start;
+    }
+
+    .button2:hover {
+        background-color: darkred;
+        color: white;
+    }
+
+    @@media (max-width: 880px) {
+        #formSection {
+            flex-flow: column;
+            padding: 150px 10%
+        }
+
+        .textbox {
+            margin-right: 0;
+        }
+
+        #formSection > div {
+            width: 100%;
+        }
+
+        #form1 > div {
+            flex-flow: column nowrap;
+        }
+
+        .button2 {
+            align-self: center;
+        }
+    }
+
+</style>
+
+<section id="formSection">
+    <div>
+        <h1 class="font_h" style="font-size: 3em; color: #3d2500;">Get in touch with any questions</h1>
+        <br />
+        <p style="font-size: 1em; margin-bottom: 0;">Address</p>
+        <p>500 Terry Francois Street San Francisco, CA 94158</p>
+        <p style="font-size: 1em; margin-bottom: 0;">Contact</p>
+        <p>123-456-7890 info@mysite.com</p>
+    </div>
+    <div>
+        <p>ֿPlease fill out the form:</p>
+        <form id="form1" asp-action="newClient" method="post">
+            <div>
+                <div>
+                    <label for="fName">First Name</label>
+                    <input asp-for="FName" type="text" class="textbox" id="fName" />
+                </div>
+                <div>
+                    <label for="lName">Last Name</label>
+                    <input asp-for="LName" type="text" class="textbox" id="lName" />
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="email">Email</label>
+                    <input asp-for="Email" type="email" class="textbox" id="email" />
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input asp-for="Phone" type="tel" class="textbox" id="phone" />
+                </div>
+            </div>
+            <div>
+                <div style="width:100%;">
+                    <label for="message">Add a message</label>
+                    <textarea asp-for="Message" type="text" class="textbox" id="message" rows="5"></textarea>
+                </div>
+            </div>
+            <br />
+            <div class="button2 float-right">
+                <span style="font-size: 1.5em; font-weight: bold;">Send</span>
+            </div>
+        </form>
+    </div>
+</section>
