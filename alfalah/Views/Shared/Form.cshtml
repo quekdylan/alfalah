@@ -13,22 +13,27 @@
         width: 40%;
     }
 
+    #formSection > div > p {
+        color: #2f1600;
+        font-size: 1.5em;
+    }
+
     #form1>div {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: stretch;
+        justify-content: space-between;
     }
 
     #form1 > div > div {
         display: flex;
         flex-flow: column nowrap;
-        justify-content: stretch;
+        width: 48%
     }
 
     .textbox {
         border: 4px black solid;
         height: 50px;
-        width: 95%;
+        width: 100%;
     }
 
     .textbox:focus, .textbox:hover {
@@ -69,9 +74,15 @@
             flex-flow: column nowrap;
         }
 
+            #form1 > div > div {
+                width: 100%
+            }
+
         .button2 {
             align-self: center;
         }
+
+
     }
 
 </style>
@@ -87,15 +98,16 @@
     </div>
     <div>
         <p>ֿPlease fill out the form:</p>
+        @model alfalah.Models.Client
         <form id="form1" asp-action="newClient" method="post">
             <div>
                 <div>
                     <label for="fName">First Name</label>
-                    <input asp-for="FName" type="text" class="textbox" id="fName" />
+                    <input asp-for="FirstName" type="text" class="textbox" id="fName" />
                 </div>
                 <div>
                     <label for="lName">Last Name</label>
-                    <input asp-for="LName" type="text" class="textbox" id="lName" />
+                    <input asp-for="LastName" type="text" class="textbox" id="lName" />
                 </div>
             </div>
             <div>

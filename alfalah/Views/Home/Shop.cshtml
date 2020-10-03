@@ -6,38 +6,182 @@
 
 <style>
     section {
+        padding: 150px 20%;
+    }
+
+    .image {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #productContainer {
         display: flex;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: center;
     }
 
-    @@media (max-width: 880px) {
+    .productBox {
+        width: 250px;
+        height: 400px;
+        padding: 20px;
+        display: flex;
+        flex-flow: column nowrap;
+    }
 
+    .productBox:hover {
+        cursor: pointer;
+    }
+
+    .productBox > p {
+        color: white;
+        margin: 4px 0;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .modal-body {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-items: center;
+        align-items: center;
+    }
+
+    #modal-div-left {
+        margin-right: 50px;
+    }
+
+    #submitBtn {
+        border: none;
+        background-color: #d33737;
+        color: white;
+        transition: background-color linear 0.2s;
+        width: 100%;
+        padding: 10px;
+        margin: 25px 0;
+    }
+
+        #submitBtn:hover {
+            background-color: #d36666;
+        }
+
+    @@media (max-width: 880px) {
+        section {
+            padding: 150px 5%;
+        }
+
+        .modal-body {
+            flex-flow: column nowrap;
+        }
+
+        .productBox {
+            width: 45%;
+        }
+
+        #modal-div-left {
+            margin-right: 0;
+        }
     }
 </style>
 
 <main>
     <section style="background-color: black;">
+        <div id="productContainer">
+            @{ int index = 0;
+                foreach (alfalah.Models.Product product in ViewBag.productList)
+                {
+                    index = index + 1;
+                    <div class="productBox"
+                         data-toggle="modal"
+                         data-target="#productModal"
+                         data-type="@product.Type"
+                         data-name="@product.Name"
+                         data-price="@product.Price"
+                         data-weight="@product.Weight"
+                         data-variations="@product.Variations"
+                         data-description="@product.Description"
+                         data-imagepath="@product.ImagePath">
+                        <img class="image" src="~/media/@product.ImagePath" alt="@product.Name" />
+                        <p style="font-size: 1.5em; margin-top: auto;">@product.Name</p>
+                        <p style="margin-bottom: 20px;">@product.Price</p>
+                    </div>
+                }
+            }
+        </div>
 
-        <button class="snipcart-add-item"
-                data-item-id="starry-night"
-                data-item-price="79.99"
-                data-item-url="/shop"
-                data-item-description="High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh."
-                data-item-image="/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png"
-                data-item-name="The Starry Night">
-            Add to cart
-        </button>
-        <p> test </p>
+        <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="float: right;">&times;</span>
+                    </button>
+                    <div class="modal-body">
+                        <div id="modal-div-left">
+                            <img id="modal-img" src="" alt="test" />
+                        </div>
+                        <div>
+                            <h1 id="modal-product-name">Title</h1>
+                            <p id="modal-product-price" style="margin-bottom: 2px; font-weight: bold; font-size: 1.5em;">Price</p>
+                            <p id="modal-product-weight">Price/weight</p>
+                            @model alfalah.Models.CartItem
+                            <form asp-action="newCartItem" method="post">
+                                <div id="modal-variations">
+                                    <label for="type">Type</label>
+                                    <select asp-for="Type" type="text" class="textbox" id="type">
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="quantity">Quantity</label>
+                                    <input asp-for="Quantity" type="number" class="textbox" id="quantity" value="1" min="1" max="99" />
+                                </div>
+                                <input type="hidden" asp-for="Name" id="modal-input-name" />
+                                <input type="hidden" asp-for="Price" id="modal-input-price" />
+                                <input type="hidden" asp-for="ImagePath" id="modal-input-image" />
+                                <div class="form-group">
+                                    <button type="submit" id="submitBtn">Add to cart</button>
+                                </div>
+                            </form>
+                            <p id="modal-product-description">Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 </main>
-<script src="http://d3js.org/d3.v3.js"></script>
 
 <script>
-    var data = $.csv.toObjects(items.csv);
-    console.log(data)
-</script>
+    $('#productModal').on('show.bs.modal', function (event) {
+        var product = $(event.relatedTarget) // Button that triggered the modal
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        document.querySelector("#modal-img").src = "/media/" + product.data('imagepath');
+        document.querySelector("#modal-product-name").innerHTML = product.data('name');
+        document.querySelector("#modal-product-price").innerHTML = product.data('price');
+        document.querySelector("#modal-product-weight").innerHTML = product.data('price') + " / " + product.data('weight');
+        document.querySelector("#modal-product-description").innerHTML = product.data('description');
+        document.querySelector("#modal-input-name").value = product.data('name');
+        document.querySelector("#modal-input-price").value = product.data('price')
+        document.querySelector("#modal-input-image").value = product.data('imagepath')
+        document.querySelector("#type").innerHTML = "";
 
-<script async src="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.js"></script>
-<div hidden id="snipcart" data-api-key="YTljNDVlN2MtYjA4MC00YzYwLTlmYjYtY2I3MzhhMTg1MWM2NjM3MzY5NzExMTY1NzExOTg1"></div>
+        var variations = product.data('variations').split("/");
+        if (variations.length == 1) {
+            document.querySelector("#modal-variations").style.display = "none";
+        }
+
+        else {
+            for (var i = 0; i < variations.length; i++) {
+                var option = document.createElement("option");
+                option.value = variations[i];
+                option.text = variations[i];
+                document.querySelector("#type").appendChild(option);
+                document.querySelector("#modal-variations").style.display = "block";
+            }
+        }
+    })
+</script>

@@ -236,6 +236,13 @@
             <li class="nav-item ml-5">
                 <a class="@("nav-link " + (ViewData["Title"] == "Shop" ? "current" : ""))" href="~/shop">Shop</a>
             </li>
+            <li class="nav-item ml-5">
+                <a class="@((ViewData["Title"] == "Cart"))" href="~/cart">
+                    <svg style="margin-top: 6px;" width="1.8em" height="1.8em" viewBox="0 0 16 16" class="bi bi-bag-fill" fill="#ffd800" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
+                    </svg>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -251,6 +258,9 @@
             </li>
             <li class="nav-item ml-5">
                 <a class="noborder @((ViewData["Title"] == "Shop" ? "current" : ""))" href="~/shop">Shop</a>
+            </li>
+            <li class="nav-item ml-5">
+                <a class="noborder @((ViewData["Title"] == "Cart" ? "current" : ""))" href="~/cart">Cart</a>
             </li>
         </ul>
     </nav>

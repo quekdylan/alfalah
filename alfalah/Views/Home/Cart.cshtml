@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    section {
+        padding: 150px 20%;
+    }
+
+    #cartList {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 70%;
+        margin-bottom: 100px;
+    }
+
+    #cartItem {
+        display: flex;
+        flex-flow: row nowrap;
+        height: 160px;
+        align-items: center;
+        width: 100%;
+        border: 2px grey solid;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        color: white;
+    }
+
+    p {
+        color: #c09300;
+        margin-bottom: 2px;
+    }
+
+    .quantityTextbox {
+        border: #c09300 2px solid;
+        color: #c09300;
+        background-color: black;
+    }
+
+    .checkoutBtn {
+        border: none;
+        background-color: #d33737;
+        color: white;
+        transition: background-color linear 0.2s;
+        width: 100%;
+        padding: 10px;
+        margin: 50px 0;
+    }
+
+    #orderSummary {
+        width: 400px;
+    }
+
+    @@media (max-width: 880px) {
+
+        section {
+            padding: 150px 5%;
+        }
+
+        #cartList, #orderSummary {
+            width: 100%;
+        }
+
+
+    }
+
+</style>
+
+<main>
+    <section style="background-color:black;">
+        <h2>My Cart</h2>
+        <div id="cartList">
+            @{
+                if (ViewBag.cart == null || ViewBag.cart.Count == 0)
+                {
+                    <p>Your cart is empty</p>
+                }
+
+                else
+                {
+                    ViewBag.subtotal = 0;
+                    foreach (alfalah.Models.CartItem item in ViewBag.cart)
+                    {
+                        ViewBag.subtotal += Convert.ToDecimal(item.Total);
+                        <div id="cartItem">
+                            <img class="image" src="~/media/@item.ImagePath" alt="@item.Name" style="width: 100px; margin-right: 25px;" />
+                            <div>
+                                <p style="font-size: 2em; color: white;">@item.Name</p>
+                                <p>@item.Price</p>
+                                <p>@item.Type</p>
+                                <input type="number" class="quantityTextbox" id="quantity" min="1" max="99" value="@item.Quantity" />
+                            </div>
+                            <div style="margin-left: auto;">
+                                <p style="margin-bottom: 0; color: white;">Subtotal</p>
+                                <p style="font-size: 1.6em;">$@item.Total</p>
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <span style="float: right; color: white; cursor: pointer;">&times;</span>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+        @if (!(ViewBag.cart == null || ViewBag.cart.Count == 0))
+        {
+            <div id="orderSummary">
+                <h2>Order Summary</h2>
+                <div style="display: flex; flex-flow: row nowrap;">
+                    <p>Total</p>
+                    <p style="margin-left: auto;">$@ViewBag.subtotal</p>
+                </div>
+                <div>
+                    <button class="checkoutBtn">Checkout</button>
+                </div>
+            </div>
+        }
+    </section>
+
+</main>
