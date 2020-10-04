@@ -73,7 +73,12 @@
         display: flex;
         cursor: pointer;
         position: relative;
+        width: 300px;
         margin: 20px;
+    }
+
+    .imgContainer>img {
+        width: 100%;
     }
 
     .imgContainer>* {
@@ -99,8 +104,13 @@
         top: 150px;
     }
 
-    #div1pad {
-        padding-right: 100px;
+    #div1 {
+        width: 40%;
+        margin-right: 80px;
+    }
+
+    #div2 {
+        width: 40%;
     }
 
     @@media (max-width: 880px) {
@@ -111,8 +121,10 @@
             padding: 150px 5%;
         }
 
-        #div1pad {
-            padding: 0 0 50px 0;
+        #div1, #div2 {
+            width: 100%;
+            text-align: center;
+            margin: 0 0 40px 0;
         }
 
         h2 {
@@ -131,25 +143,25 @@
     <section style="background-color: black; flex-flow: column;">
         <h1 class="font_h" style="font-size: 4em; color: #F0B800;">AL FALAH</h1>
         <br />
-        <p style="color: #F0B800;">Punde Limited</p>
+        <p style="color: #F0B800;">Private Limited</p>
         <img src="~/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png" alt="Logo" style="width: 40%; min-width: 360px;">
         <br />
-        <div class="button1">
+        <div class="button1" onclick="window.location.href='/about-us'" >
             Find Out More
         </div>
     </section>
 
     <section style="background-color: #F0B800;">
-        <div id="div1pad">
+        <div id="div1">
             <h1 class="font_h" style="font-size: 3em; color: #3d2500;">Our Vision</h1>
-            <img src="~/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png" alt="Logo" style="width: 100%; min-width: 360px;">
+            <img src="~/media/WhatsApp Image 2020-09-04 at 7_54_10 PM_.png" alt="Logo" style="width: 100%;">
         </div>
-        <div>
+        <div id="div2">
             <p style="color: #3d2500;">
                 I'm a paragraph. Click here to add your own text and edit me. I’m a great place for you to
                 tell a story and let your users know a little more about you.
             </p>
-            <div class="button2">
+            <div class="button2" onclick="window.location.href='/about-us'" >
                 <span style="font-size: 1.5em; font-weight: bold;">Our Story</span>
             </div>
         </div>
@@ -211,21 +223,29 @@
             and let your users know a little more about you.
         </p>
         <br />
-        <div class="button1">Need Supplies?</div>
+        <div class="button1"  onclick="window.location.href='/shop'" >Need Supplies?</div>
     </section>
 
     <section style="background-color: black; flex-flow: column;">
         <div style="display: flex; flex-flow: row wrap; width: 100%; justify-content: space-around;">
-            <div class="imgContainer">
+            <div class="imgContainer" onclick="location.href='@Url.Action("Shop", "Home", new {type="Chicken"})'">
                 <img src="~/media/800ae9_3e2a96d8e6b94476a8ff478d58b2ca7f_mv2.png" alt="Chicken" />
                 <p>CHICKEN</p>
             </div>
-            <div class="imgContainer">
-                <img src="~/media/800ae9_ff3d7321a54c45e8ab08566436063c1f_mv2.png" alt="Chicken" />
+            <div class="imgContainer" onclick="location.href='@Url.Action("Shop", "Home", new {type="Mutton"})'">
+                <img src="~/media/800ae9_ff3d7321a54c45e8ab08566436063c1f_mv2.png" alt="Mutton" />
                 <p>MUTTON</p>
             </div>
+            <div class="imgContainer" onclick="location.href='@Url.Action("Shop", "Home", new {type="Beef"})'">
+                <img src="~/media/beef.jpg" alt="Beef" />
+                <p>BEEF</p>
+            </div>
+            <div class="imgContainer" onclick="location.href='@Url.Action("Shop", "Home", new {type="Lamb"})'">
+                <img src="~/media/lamb.jpg" alt="Lamb" />
+                <p>LAMB</p>
+            </div>
         </div>
-        <div class="button1" style="margin-top: 120px;">ORDER NOW</div>
+        <div class="button1" style="margin-top: 120px;" onclick="location.href='@Url.Action("Shop", "Home")'">ORDER NOW</div>
     </section>
 
 </main>

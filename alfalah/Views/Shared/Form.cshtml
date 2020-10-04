@@ -127,8 +127,23 @@
                 </div>
             </div>
             <br />
-            <div class="button2 float-right">
-                <span style="font-size: 1.5em; font-weight: bold;">Send</span>
+            <div class="float-right" style="display: flex; flex-flow: row nowrap;">
+                @if (ViewBag.Cart != null)
+                {
+                    <div style="margin-left: auto; height: 60px; width: fit-content; padding: 0 15px; background-color: #eee; display: flex; flex-flow: row; align-items: center;">
+                        <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z" />
+                        </svg>
+                        @{ int totalQty = 0;
+                            foreach (alfalah.Models.CartItem item in ViewBag.Cart)
+                            {
+                                totalQty += item.Quantity;
+                            }
+                            <span style="margin-left: 5px; font-weight: lighter; font-size: 1.2em;">@totalQty items</span>
+                        }
+                    </div>
+                }
+                <button type="submit" style="margin-left: 20px; height: 60px; font-size: 1.5em; font-weight: bold;" class="button2 float-right noborder">Send</button>
             </div>
         </form>
     </div>

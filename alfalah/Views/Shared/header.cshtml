@@ -50,7 +50,7 @@
 
     .button_container {
         position: fixed;
-        top: 3%;
+        top: 3.5%;
         right: 4%;
         height: 20px;
         width: 25px;
@@ -141,6 +141,11 @@
                     animation-delay: 0.5s;
                 }
 
+                .overlay.open li:nth-of-type(4) {
+                    -webkit-animation-delay: 0.6s;
+                    animation-delay: 0.6s;
+                }
+
         .overlay nav {
             position: relative;
             height: 70%;
@@ -148,7 +153,7 @@
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
             font-size: 50px;
-            font-family: "Vollkorn", serif;
+            font-family: "Oswald" sans-serif;
             font-weight: 400;
             text-align: center;
         }
@@ -176,7 +181,6 @@
                     color: #fff;
                     text-decoration: none;
                     overflow: hidden;
-                    font-family: 'Oswald' sans-serif;
                 }
 
     @@-webkit-keyframes fadeInRight {
@@ -250,16 +254,16 @@
 <div class="overlay" id="overlay">
     <nav class="overlay-menu">
         <ul>
-            <li class="nav-item ml-5">
+            <li class="nav-item">
                 <a class="noborder @((ViewData["Title"] == "Home" ? "current" : ""))" href="@Url.Action("Index", "Home")">Home</a>
             </li>
-            <li class="nav-item ml-5">
+            <li class="nav-item">
                 <a class="noborder @((ViewData["Title"] == "About Us" ? "current" : ""))" href="~/about-us">About Us</a>
             </li>
-            <li class="nav-item ml-5">
+            <li class="nav-item">
                 <a class="noborder @((ViewData["Title"] == "Shop" ? "current" : ""))" href="~/shop">Shop</a>
             </li>
-            <li class="nav-item ml-5">
+            <li class="nav-item">
                 <a class="noborder @((ViewData["Title"] == "Cart" ? "current" : ""))" href="~/cart">Cart</a>
             </li>
         </ul>

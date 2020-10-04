@@ -25,8 +25,12 @@
         width: 250px;
         height: 400px;
         padding: 20px;
-        display: flex;
+        display: none;
         flex-flow: column nowrap;
+    }
+
+    .show {
+        display: flex;
     }
 
     .productBox:hover {
@@ -50,7 +54,12 @@
     }
 
     #modal-div-left {
-        margin-right: 50px;
+        margin-right: 40px;
+        width: 40%;
+    }
+
+    #modal-div-right {
+        width: 50%;
     }
 
     #submitBtn {
@@ -67,6 +76,34 @@
             background-color: #d36666;
         }
 
+    #filterContainer {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    .filterBtn {
+        background-color: rgba(191, 146, 0, 0.50);
+        border: 2px rgb(191, 146, 0) solid;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        font-size: 1em;
+        margin-right: 10px;
+        transition: background-color 0.1s linear;
+    }
+        .filterBtn:hover {
+            background-color: rgba(191, 146, 0, 0.75);
+        }
+
+        .filterBtn:focus {
+            outline: 0;
+        }
+
+        .active {
+            background-color: rgb(191, 146, 0);
+        }
+
+
     @@media (max-width: 880px) {
         section {
             padding: 150px 5%;
@@ -78,22 +115,42 @@
 
         .productBox {
             width: 45%;
+            height: fit-content;
         }
 
         #modal-div-left {
             margin-right: 0;
+            width: 100%;
+        }
+
+        #modal-div-right {
+            width: 100%;
         }
     }
 </style>
 
 <main>
     <section style="background-color: black;">
+        <div id="filterContainer">
+            <button class="filterBtn" onclick="filter('All')">All</button>
+            @{
+                List<string> Types = new List<string>();
+                foreach (alfalah.Models.Product product in ViewBag.productList)
+                {
+                    if (!Types.Contains(product.Type))
+                    {
+                        Types.Add(product.Type);
+                        <button class="filterBtn" onclick="filter('@product.Type')">@product.Type</button>
+                    }
+                }
+            }
+        </div>
         <div id="productContainer">
             @{ int index = 0;
                 foreach (alfalah.Models.Product product in ViewBag.productList)
                 {
                     index = index + 1;
-                    <div class="productBox"
+                    <div class="productBox @product.Type"
                          data-toggle="modal"
                          data-target="#productModal"
                          data-type="@product.Type"
@@ -119,9 +176,9 @@
                     </button>
                     <div class="modal-body">
                         <div id="modal-div-left">
-                            <img id="modal-img" src="" alt="test" />
+                            <img id="modal-img" src="" alt="test" style="width: 100%;"/>
                         </div>
-                        <div>
+                        <div id="modal-div-right">
                             <h1 id="modal-product-name">Title</h1>
                             <p id="modal-product-price" style="margin-bottom: 2px; font-weight: bold; font-size: 1.5em;">Price</p>
                             <p id="modal-product-weight">Price/weight</p>
@@ -184,4 +241,28 @@
             }
         }
     })
+
+    function filter(type) {
+        var x, i, btns;
+        x = document.getElementsByClassName("productBox");
+        var btns = document.getElementsByClassName("filterBtn");
+        for (var i = 0; i < btns.length; i++) {
+            if (btns[i].innerHTML == type) {
+                btns[i].classList.add("active");
+            }
+            else {
+                btns[i].classList.remove("active");
+            }
+        }
+        if (type == "All") type = "";
+        for (i = 0; i < x.length; i++) {
+            if (x[i].className.indexOf(type) > -1) {
+                x[i].classList.add("show");
+            }
+            else {
+                x[i].classList.remove("show");
+            }
+        }
+    }
+    filter("@ViewBag.type");
 </script>

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace alfalah.Controllers
 {
@@ -31,7 +32,7 @@ namespace alfalah.Controllers
         }
 
         [Route("/shop")]
-        public IActionResult Shop()
+        public IActionResult Shop(string type = "All")
         {
             using (TextFieldParser parser = new TextFieldParser(@"wwwroot\items.csv"))
             {
@@ -56,6 +57,7 @@ namespace alfalah.Controllers
                     productList.Add(product);
                 }
                 ViewBag.productList = productList;
+                ViewBag.type = type;
             }
             return View();
         }
@@ -100,6 +102,118 @@ namespace alfalah.Controllers
             ViewBag.cart = cart;
             return View();
         }
+
+        public IActionResult Delete(CartItem cartItem)
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Session.GetString("Cart") != null)
+            {
+                cart = DataDeserialize(HttpContext.Session.GetString("Cart"));
+            }
+
+            for (int i = 0; i < cart.Count; i++)
+            {
+                if (cart[i].Name == cartItem.Name && cart[i].Type == cartItem.Type)
+                {
+                    cart.RemoveAt(i);
+                    break;
+                }
+            }
+            HttpContext.Session.SetString("Cart", DataSerialize(cart));
+            ViewBag.cart = cart;
+            return RedirectToAction("Cart", "Home");
+        }
+
+        public IActionResult ChangeQty(IFormCollection collection)
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Session.GetString("Cart") != null)
+            {
+                cart = DataDeserialize(HttpContext.Session.GetString("Cart"));
+            }
+
+            for (int i = 0; i < cart.Count; i++)
+            {
+                if (cart[i].Name == collection["name"] && (cart[i].Type == collection["type"] || collection["type"] == ""))
+                {
+                    cart[i].Quantity = Convert.ToInt32(collection["quantity"]);
+                    break;
+                }
+            }
+            HttpContext.Session.SetString("Cart", DataSerialize(cart));
+            ViewBag.cart = cart;
+            return RedirectToAction("Cart", "Home");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> newClient(Client client)
+        {
+            try
+            {
+                // Email: alfalahnotifications@gmail.com
+                // Password: aLfALAh99
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Credentials = new System.Net.NetworkCredential("alfalahnotifications@gmail.com", "aLfALAh99");
+                MailMessage message = new MailMessage();
+                MailAddress fromAddress = new MailAddress("alfalahnotifications@gmail.com");
+                MailAddress toAddress = new MailAddress("af_supplies@outlook.com");
+
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.Port = 587;
+                smtpClient.EnableSsl = true;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Timeout = 5000;
+
+                message.From = fromAddress;
+                message.To.Add(toAddress);
+                message.IsBodyHtml = false;
+                message.Subject = "New Client Notification";
+                message.Body =
+                    "New Client Notification [Al Falah]" +
+                    "\n\nFirst Name: " + client.FirstName +
+                    "\nLast Name: " + client.LastName +
+                    "\nEmail: " + client.Email +
+                    "\nPhone: " + client.Phone +
+                    "\nMessage: " + client.Message +
+                    "\n\n" + GenerateCart();
+                smtpClient.Send(message);
+                TempData["msg"] = "<script>alert('Thank you, we will contact you shortly.');</script>";
+                HttpContext.Session.Remove("Cart");
+                return RedirectToAction("Index", "Home");
+            }
+            catch(Exception ex)
+            {
+                TempData["msg"] = "<script>alert('[Error] Please try again or contact me directly at af_supplies@outlook.com');</script>";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public string GenerateCart()
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Session.GetString("Cart") != null)
+            {
+                string cartString = "Cart items";
+                decimal total = 0;
+                cart = DataDeserialize(HttpContext.Session.GetString("Cart"));
+                foreach(CartItem item in cart)
+                {
+                    cartString += ("\n$" + item.Total);
+                    cartString += ("\t" + item.Quantity + "x\t" + item.Name);
+                    if (!(item.Type == "" || item.Type == null)) {
+                        cartString +=(" (" + item.Type + ")");
+                    }
+                    total += decimal.Parse(item.Total, NumberStyles.Currency);
+                }
+                cartString += ("\nTotal: $" + total);
+                return cartString;
+            }
+            else
+            {
+                return "User cart is empty";
+            }
+        }
+
 
         public static string DataSerialize(List<CartItem> myList)
         {
