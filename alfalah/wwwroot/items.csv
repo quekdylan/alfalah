@@ -1,0 +1,20 @@
+Type,Name, Price ($),Weight,"Variations (Leave blank if none, separate using /)",Description,Image (wwwroot/media)
+Chicken,Whole Chicken,$8.50,1.2kg,,"Frozen Chicken imported from Brazil, Halal certified and hormone free. Customized cuts available.",pigeon.jpg
+Chicken,Chicken Wing,$7.50,1kg,,,chicken wing.jpg
+Chicken,Chicken Breast,$10.00,1kg,,,boneless chicken breast.jpg
+Chicken,Chicken Leg Quater,$4.50,1kg,,,chicken leg quater.jpg
+Chicken,Boneless Chicken,$9.00,1kg,,,boneless chicken.jpg
+Mutton,Boneless Mutton,$22.00,1kg,,,boneless mutton.jpg
+Mutton,Mutton Chops,$20.00,1kg,,,mutton chops.jpg
+Mutton,Mutton Ribs Chops,$20.00,1kg,,,mutton ribs chops.jpg
+Mutton,Mutton Ribs,$15.00,1kg,,,mutton ribs.jpg
+Mutton,Mutton Liver,$9.00,1kg,,,mutton liver.jpg
+Beef,Beef Premium,$14.00,1kg,,,beef premium.jpg
+Beef,Beef Striploin,$18.00,81kg,,,striplion.jpg
+Beef,Beef Lungs,$9.50,1kg,,,beef lungs.jpg
+Beef,Beef Cubes,$11.00,1kg,,,beef cube.jpg
+Lamb,Lamb Chops,$28.00,1kg,,,lamb chops.jpg
+Lamb,Lamb Boneless,$32.00,1kg,,,lamb boneless.jpg
+Lamb,Lamb Rack,$48.00,1kg,,,lamb rack.jpg
+Lamb,Lamb Shank,$20.00,1kg,,,lamb shank.jpg
+

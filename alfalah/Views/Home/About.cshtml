@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #imgDiv1 {
+        width: 25%;
+        height: 750px;
+        background: url(media/885f815586f74d2493ca39e56aa770dd.png) no-repeat;
+        background-size: cover;
+    }
+
+    #imgDiv2 {
+        width: 25%;
+        height: 750px;
+        background: url(media/f1dcd76240564bdfbafb7c03457c3dc3.png) center no-repeat;
+        background-size: cover;
+    }
+
+    #centerDiv {
+        width: 50%;
+        height: 750px;
+        background-color: #fcf8ed;
+        text-align: center;
+        padding: 10%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-content: center;
+    }
+
+    @@media (max-width: 880px) {
+        section {
+            flex-flow: column;
+        }
+
+        #imgDiv1 {
+            height: 300px;
+            width: 100%;
+        }
+
+        #imgDiv2 {
+            height: 300px;
+            width: 100%;
+        }
+
+        #centerDiv {
+            height: 600px;
+            width: 100%;
+        }
+    }
+</style>
+
+<main>
+    <section>
+        <div id="imgDiv1"></div>
+
+        <div id="centerDiv">
+            <div>
+                <h1 style="font-family: 'Dancing Script', cursive; font-size: 4em; color: #bc9b5d">About Us</h1>
+                <h2 style="font-family: Lato; font-weight: 100; font-size: 1.5em; color: darkgrey">AL FALAH ENTERPRISE</h2>
+                <br />
+                <p style="font-family: 'Segoe UI'; font-weight: 200; font-size: 1.2em; color: black">
+                    Al Falah Enterprise is dedicated in supplying the largest variety of PREMIUM QUALITY HALAL MEAT islandwide,
+                     such as frozen and chilled lamb, mutton, beef, chicken and other seafood varities.
+                </p>
+                <p style="font-family: 'Segoe UI'; font-weight: 200; font-size: 1.2em; color: black">
+                    We built strong relations with all our customers as we create a better understanding between us thropugh our customised 
+                    processing services for meat products in regards to our customers' preferences.
+                </p>
+                    <br />
+                    <a style="font-family: 'Dancing Script', cursive; font-size: 1.5em; color: #bc9b5d" href="#">Contact Us ></a>
+</div>
+        </div>
+
+        <div id="imgDiv2"></div>
+    </section>
+
+</main>

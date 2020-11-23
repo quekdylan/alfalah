@@ -1,0 +1,148 @@
+﻿
+<style>
+    #formSection {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding: 150px 20%;
+    }
+
+    #formSection>div {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 40%;
+    }
+
+    #formSection > div > p {
+        color: #2f1600;
+        font-size: 1.5em;
+    }
+
+    #form1>div {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    #form1 > div > div {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 48%
+    }
+
+    .textbox {
+        border: 4px black solid;
+        height: 50px;
+        width: 100%;
+    }
+
+    .textbox:focus, .textbox:hover {
+        border: 4px #850029 solid;
+    }
+
+    .button2 {
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.00);
+        color: darkred;
+        transition: background-color ease-out 0.2s;
+        cursor: pointer;
+        box-shadow: inset 0px 0px 0px 4px darkred;
+        width: fit-content;
+        align-self: flex-start;
+    }
+
+    .button2:hover {
+        background-color: darkred;
+        color: white;
+    }
+
+    @@media (max-width: 880px) {
+        #formSection {
+            flex-flow: column;
+            padding: 150px 10%
+        }
+
+        .textbox {
+            margin-right: 0;
+        }
+
+        #formSection > div {
+            width: 100%;
+        }
+
+        #form1 > div {
+            flex-flow: column nowrap;
+        }
+
+            #form1 > div > div {
+                width: 100%
+            }
+
+        .button2 {
+            align-self: center;
+        }
+
+
+    }
+
+</style>
+
+<section id="formSection">
+    <div>
+        <h1 class="font_h" style="font-size: 3em; color: #3d2500;">Get in touch with our team!</h1>
+        <br />
+        <p style="font-size: 1em; margin-bottom: 0;">Contact</p>
+        <p>+65 87544715 alfalah@meataf.com</p>
+    </div>
+    <div>
+        <p>ֿPlease fill out the form:</p>
+        @model alfalah.Models.Client
+        <form id="form1" asp-action="newClient" method="post">
+            <div>
+                <div>
+                    <label for="fName">First Name</label>
+                    <input asp-for="FirstName" type="text" class="textbox" id="fName" />
+                </div>
+                <div>
+                    <label for="lName">Last Name</label>
+                    <input asp-for="LastName" type="text" class="textbox" id="lName" />
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="email">Email</label>
+                    <input asp-for="Email" type="email" class="textbox" id="email" />
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input asp-for="Phone" type="tel" class="textbox" id="phone" />
+                </div>
+            </div>
+            <div>
+                <div style="width:100%;">
+                    <label for="message">Add a message</label>
+                    <textarea asp-for="Message" type="text" class="textbox" id="message" rows="5"></textarea>
+                </div>
+            </div>
+            <br />
+            <div class="float-right" style="display: flex; flex-flow: row nowrap;">
+                @if (ViewBag.Cart != null)
+                {
+                    <div style="margin-left: auto; height: 60px; width: fit-content; padding: 0 15px; background-color: #eee; display: flex; flex-flow: row; align-items: center;">
+                        <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z" />
+                        </svg>
+                        @{ int totalQty = 0;
+                            foreach (alfalah.Models.CartItem item in ViewBag.Cart)
+                            {
+                                totalQty += item.Quantity;
+                            }
+                            <span style="margin-left: 5px; font-weight: lighter; font-size: 1.2em;">@totalQty items</span>
+                        }
+                    </div>
+                }
+                <button type="submit" style="margin-left: 20px; height: 60px; font-size: 1.5em; font-weight: bold;" class="button2 float-right noborder">Send</button>
+            </div>
+        </form>
+    </div>
+</section>

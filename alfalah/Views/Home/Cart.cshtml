@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    section {
+        padding: 150px 20%;
+    }
+
+    #cartList {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 60%;
+        margin-bottom: 100px;
+    }
+
+    #cartItem {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        width: 100%;
+        border: 2px grey solid;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+
+    .image {
+        width: 100px;
+        margin-right: 20px;
+    }
+
+    h2, h3 {
+        color: white;
+        margin-bottom: 0;
+    }
+
+    p {
+        color: #c09300;
+        margin-bottom: 2px;
+    }
+
+    .quantityTextbox {
+        border: #c09300 2px solid;
+        color: #c09300;
+        background-color: black;
+    }
+
+    .checkoutBtn {
+        border: none;
+        background-color: #d33737;
+        color: white;
+        transition: background-color linear 0.2s;
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+    }
+
+    #continueShoppingDiv {
+        background-color: #222;
+        padding: 50px 20px;
+        width: 30%;
+        margin-left: auto;
+        margin-bottom: 50px;
+    }
+
+    #orderSummary {
+        width: 400px;
+    }
+
+    @@media (max-width: 880px) {
+
+        .image {
+            width: 80px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+        }
+
+        section {
+            padding: 150px 5%;
+        }
+
+        #cartList, #orderSummary, #continueShoppingDiv {
+            width: 100%;
+            margin-left: 0;
+        }
+
+    }
+
+</style>
+
+<main>
+    <section style="background-color:black;">
+        <h2 style="margin-bottom: 15px;">My Order</h2>
+        <div style="display: flex; flex-flow: row wrap;">
+            <div id="cartList">
+                @{
+                    if (ViewBag.cart == null || ViewBag.cart.Count == 0)
+                    {
+                        <p>Your cart is empty</p>
+                    }
+
+                    else
+                    {
+                        ViewBag.subtotal = 0;
+                        foreach (alfalah.Models.CartItem item in ViewBag.cart)
+                        {
+                            ViewBag.subtotal += Convert.ToDecimal(item.Total);
+                            <div id="cartItem">
+                                <img class="image" src="~/media/@item.ImagePath" alt="@item.Name"/>
+                                <div>
+                                    <h3>@item.Name</h3>
+                                    <p>@item.Price</p>
+                                    <p>@item.Type</p>
+                                    <form asp-action="changeQty">
+                                        <input type="hidden" name="name" value="@item.Name" />
+                                        <input type="hidden" name="type" value="@item.Type" />
+                                        <input type="number" name="quantity" style="text-align: center;" class="quantityTextbox" id="quantity" min="1" max="99" required value="@item.Quantity" onchange="this.form.submit()" />
+                                    </form>
+                                </div>
+                                <div style="margin-left: auto;">
+                                    <p style="margin-bottom: 0; color: white;">Subtotal</p>
+                                    <p style="font-size: 1.6em;">$@item.Total</p>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <button style="float: right; color: white; border: none; background: none;" onclick="location.href='@Url.Action("Delete", "Home", item)'">&times;</button>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <div id="continueShoppingDiv">
+                <h3>Need more?</h3>
+                <button class="checkoutBtn" onclick="window.location.href='/shop'" >← Continue Shopping</button>
+            </div>
+        </div>
+        
+        @if (!(ViewBag.cart == null || ViewBag.cart.Count == 0))
+        {
+            <div id="orderSummary">
+                <h2>Order Summary</h2>
+                <div style="display: flex; flex-flow: row nowrap; margin: 20px 0;">
+                    <h3 style="color: grey;">Total:</h3>
+                    <p style="margin-left: auto; font-size: 1.5em;">$@ViewBag.subtotal</p>
+                </div>
+                <div>
+                    <button class="checkoutBtn" data-toggle="modal" data-target=".bd-example-modal-sm">Checkout</button>
+                </div>
+            </div>
+
+            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm .modal-dialog-centered">
+                    <div class="modal-content" style="padding:40px;">
+                        <center>
+                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                            </svg>
+                            <h3 style="color: black; margin: 20px 0;">
+                                We are currently unable to accept online payments
+                            </h3>
+                            <p>
+                                Your cart is saved.
+                                Please contact us to complete your purchase. Thanks.
+                            </p>
+                            <button class="checkoutBtn" data-dismiss="modal" aria-label="Close" id="scrollToForm">Proceed</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+
+</main>
+
+<script>
+    $("#scrollToForm").click(function() {
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#formSection").offset().top
+        }, 1000);
+    });
+</script>
