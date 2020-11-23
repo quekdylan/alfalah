@@ -183,6 +183,7 @@ namespace alfalah.Controllers
             }
             catch(Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex);
                 TempData["msg"] = "<script>alert('[Error]' " + ex + ");</script>";
                 return RedirectToAction("Index", "Home");
             }
